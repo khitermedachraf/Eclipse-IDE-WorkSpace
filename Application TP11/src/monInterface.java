@@ -2,7 +2,6 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -18,7 +17,7 @@ import net.proteanit.sql.DbUtils;
 public class monInterface {
 
 	private Connection connection = null;
-	private Statement stmt = null;
+	private java.sql.Statement stmt = null;
 	private ResultSet rs = null;
 
 	private JFrame frame;
@@ -62,8 +61,10 @@ public class monInterface {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					rs = ((java.sql.Statement) stmt).executeQuery("SELECT * FROM ETUDIANT");
+					System.out.println("conx etablie");
 				} catch (SQLException e1) {
 					e1.printStackTrace();
+					System.out.println("erruer");
 				}
 				table.setModel(DbUtils.resultSetToTableModel(rs));
 			}
@@ -82,9 +83,11 @@ public class monInterface {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			connection = DriverManager.getConnection("jdbc:oracle:thin:BDDAdmin/TPAdmin@localhost");
-			stmt = (Statement) connection.createStatement();
+			stmt = connection.createStatement();
+			System.out.println("conx etablie");
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("erruer");
 		}
 	}
 }
