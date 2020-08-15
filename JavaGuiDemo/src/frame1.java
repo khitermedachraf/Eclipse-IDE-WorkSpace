@@ -1,10 +1,13 @@
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class frame1 {
@@ -56,10 +59,36 @@ public class frame1 {
 		textFieldNum2.setColumns(10);
 
 		JButton btnNewButton = new JButton("Add");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg) {
+				int num1, num2, result;
+				try {
+					num1 = Integer.parseInt(textFieldNum1.getText());
+					num2 = Integer.parseInt(textFieldNum2.getText());
+					result = num1 + num2;
+					textFieldResult.setText(Integer.toString(result));
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, " Please enter the a valid number");
+				}
+			}
+		});
 		btnNewButton.setBounds(112, 213, 200, 56);
 		frame.getContentPane().add(btnNewButton);
 
 		JButton btnNewButton_1 = new JButton("Minus");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg1) {
+				int num1, num2, result;
+				try {
+					num1 = Integer.parseInt(textFieldNum1.getText());
+					num2 = Integer.parseInt(textFieldNum2.getText());
+					result = num1 - num2;
+					textFieldResult.setText(Integer.toString(result));
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, " Please enter the a valid number");
+				}
+			}
+		});
 		btnNewButton_1.setBounds(484, 213, 172, 56);
 		frame.getContentPane().add(btnNewButton_1);
 
