@@ -10,7 +10,7 @@ public class sqliteConnection {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			Connection conx = DriverManager.getConnection(
-					"jdbc:sqlite:D:\\Mon travail\\Git & Github\\SQLLiteStudio\\database_sqlite3\\employeeInfo.db");
+					"jdbc:sqlite:D:\\Mon travail\\Git & Github\\Eclipse IDE WorkSpace\\Eclipse-IDE-WorkSpace\\JavaGuiDemo\\employeeInfo.db");
 			JOptionPane.showMessageDialog(null, "Connection Successful");
 			return conx;
 		} catch (Exception e) {
