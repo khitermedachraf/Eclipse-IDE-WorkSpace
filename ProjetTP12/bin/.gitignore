@@ -5,9 +5,10 @@
 /frame1$2.class
 /frame1$3.class
 /sqliteConnection.class
-/.classpath
-/.gitignore
-/.project
 /Login$2.class
-/login.png
-/ok.png
+/AdminPannel$1.class
+/AdminPannel.class
+/StudentPannel$1.class
+/StudentPannel.class
+/TeacherPannel$1.class
+/TeacherPannel.class

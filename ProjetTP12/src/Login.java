@@ -90,7 +90,7 @@ public class Login {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				try {
-					String query = " select * from employee where username=? and password=? ;";
+					String query = " select * from Admins where username=? and password=? ;";
 					PreparedStatement prprStat = connection.prepareStatement(query) ;
 					prprStat.setString(1,textFieldUsername.getText());
 					prprStat.setString(2,passwordField.getText());
