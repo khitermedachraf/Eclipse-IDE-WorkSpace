@@ -13,6 +13,8 @@ import net.proteanit.sql.DbUtils;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -107,6 +109,9 @@ public class TeacherPannel extends JFrame {
 					prprStat.setString(1,textFieldMatriculeEns.getText());
 					ResultSet result = prprStat.executeQuery();
 					table.setModel(DbUtils.resultSetToTableModel(result));
+					// close connection with data base .
+					result.close();
+					prprStat.close();
 				}catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -180,6 +185,18 @@ public class TeacherPannel extends JFrame {
 		btnSave.setIcon(new ImageIcon(imgInsertBtn));
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					String query = " insert into Enseignant (matricule_ens,nom_ens,prenom_ens) values (?,?,?);";
+					PreparedStatement prprStat = connection.prepareStatement(query) ;
+					prprStat.setString(1,textFieldMatricule_ens.getText());
+					prprStat.setString(2,textFieldNom_ens.getText());
+					prprStat.setString(3,textFieldPrenom_ens.getText());
+					prprStat.execute();
+					JOptionPane.showMessageDialog(null,"Data saved successfully");
+					prprStat.close();
+				}catch (Exception e1) {
+					e1.printStackTrace();
+				}
 				
 			}
 		});

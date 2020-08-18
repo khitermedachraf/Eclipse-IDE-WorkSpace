@@ -106,6 +106,8 @@ public class StudentPannel extends JFrame {
 					prprStat.setString(1,textFieldMatriculeEtu.getText());
 					ResultSet result = prprStat.executeQuery();
 					table.setModel(DbUtils.resultSetToTableModel(result));
+					result.close();
+					prprStat.close();
 				}catch (Exception e) {
 					e.printStackTrace();
 				}
