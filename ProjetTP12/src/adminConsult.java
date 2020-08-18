@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.sql.Connection;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -24,11 +25,12 @@ public class adminConsult extends JFrame {
 			}
 		});
 	}
-
+	Connection connection = null ; 
 	/**
 	 * Create the frame.
 	 */
 	public adminConsult() {
+		connection = sqliteConnection.dbConnector(); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
