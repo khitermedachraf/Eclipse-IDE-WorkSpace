@@ -6,6 +6,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import net.proteanit.sql.DbUtils;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -13,8 +16,12 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
 
 public class StudentPannel extends JFrame {
 
@@ -37,6 +44,7 @@ public class StudentPannel extends JFrame {
 	}
 	Connection connection = null ;
 	private JTextField textFieldMatriculeEtu;
+	private JTable table;
 	/**
 	 * Create the frame.
 	 */
@@ -91,14 +99,29 @@ public class StudentPannel extends JFrame {
 		Image imgSearchBtn = new ImageIcon(this.getClass().getResource("/searchBtn.png")).getImage ();
 		btnSearch.setIcon(new ImageIcon(imgSearchBtn));
 		btnSearch.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					String query = " select * from Etudiant where matricule_etu=? ;";
+					PreparedStatement prprStat = connection.prepareStatement(query) ;
+					prprStat.setString(1,textFieldMatriculeEtu.getText());
+					ResultSet result = prprStat.executeQuery();
+					table.setModel(DbUtils.resultSetToTableModel(result));
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		});
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnSearch.setBounds(640, 258, 153, 50);
 		contentPane.add(btnSearch);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(48, 258, 586, 106);
+		contentPane.add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
 		}
-
  	}
 
 
