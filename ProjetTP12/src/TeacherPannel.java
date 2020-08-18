@@ -6,12 +6,21 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+
+import net.proteanit.sql.DbUtils;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JScrollPane;
 
 public class TeacherPannel extends JFrame {
 
@@ -34,6 +43,7 @@ public class TeacherPannel extends JFrame {
 	}
 	Connection connection = null ;
 	private JTextField textFieldMatriculeEns;
+	private JTable table;
 	/**
 	 * Create the frame.
 	 */
@@ -82,6 +92,35 @@ public class TeacherPannel extends JFrame {
 		lblSearch.setIcon(new ImageIcon(imgSearch));
 		lblSearch.setBounds(630, 111, 163, 131);
 		contentPane.add(lblSearch);
+		
+		JButton btnSearch = new JButton("Search");
+		Image imgSearchBtn = new ImageIcon(this.getClass().getResource("/searchBtn.png")).getImage ();
+		btnSearch.setIcon(new ImageIcon(imgSearchBtn));
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					String query = " select * from Enseigant where matricule_ens=? ;";
+					PreparedStatement prprStat = connection.prepareStatement(query) ;
+					prprStat.setString(1,textFieldMatriculeEns.getText());
+					ResultSet result = prprStat.executeQuery();
+					table.setModel(DbUtils.resultSetToTableModel(result));
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnSearch.setBounds(640, 258, 153, 50);
+		contentPane.add(btnSearch);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(48, 258, 586, 131);
+		contentPane.add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		
+		
 		
 	}
 
