@@ -44,7 +44,7 @@ public class AdminPannel extends JFrame {
 	public AdminPannel() {
 		connection = sqliteConnection.dbConnector(); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1002, 630);
+		setBounds(100, 100, 976, 630);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
