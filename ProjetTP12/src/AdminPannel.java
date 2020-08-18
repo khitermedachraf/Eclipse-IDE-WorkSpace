@@ -44,7 +44,7 @@ public class AdminPannel extends JFrame {
 	public AdminPannel() {
 		connection = sqliteConnection.dbConnector(); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 976, 630);
+		setBounds(100, 100, 1015, 630);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -135,7 +135,7 @@ public class AdminPannel extends JFrame {
 		lblSearch.setBounds(695, 84, 139, 134);
 		contentPane.add(lblSearch);
 		
-		JLabel labelExecute = new JLabel("New label");
+		JLabel labelExecute = new JLabel("");
 		Image imgExecute = new ImageIcon(this.getClass().getResource("/execute.png")).getImage ();
 		labelExecute.setIcon(new ImageIcon(imgExecute));
 		labelExecute.setBounds(814, 394, 139, 134);

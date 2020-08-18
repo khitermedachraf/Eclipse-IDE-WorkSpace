@@ -60,7 +60,7 @@ public class adminInsert extends JFrame {
 				Image imgLogout = new ImageIcon(this.getClass().getResource("/logout.png")).getImage ();
 				btnNewButton.setIcon(new ImageIcon(imgLogout));
 				btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 20));
-				btnNewButton.setBounds(630, 30, 163, 50);
+				btnNewButton.setBounds(803, 30, 163, 50);
 				contentPane.add(btnNewButton);
 	}
 
