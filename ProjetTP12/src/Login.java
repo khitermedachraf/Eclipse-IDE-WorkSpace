@@ -53,7 +53,7 @@ public class Login {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 849, 550);
+		frame.setBounds(100, 100, 852, 554);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
@@ -89,6 +89,7 @@ public class Login {
 		btnLogin.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
+				// while cliquing on Login it will connect to database and verify the user info
 				try {
 					String query = " select * from Admins where username=? and password=? ;";
 					PreparedStatement prprStat = connection.prepareStatement(query) ;
@@ -101,10 +102,22 @@ public class Login {
 					}
 					if(count == 1) {
 						JOptionPane.showMessageDialog(null, " Username and Password is Corrected :)");
+						frame.dispose();
+						if(textFieldUsername.getText().contentEquals("BDDAdmin") && passwordField.getText().contentEquals("TPAdmin") ) {
+							AdminPannel adminPnl = new AdminPannel () ;
+							adminPnl.setVisible(true);						
+						} else if (textFieldUsername.getText().contentEquals("Etudiant") && passwordField.getText().contentEquals("TPEtudiant")) {
+							StudentPannel stdntPnl = new StudentPannel();
+							stdntPnl.setVisible(true);
+						} else if (textFieldUsername.getText().contentEquals("Enseignant") && passwordField.getText().contentEquals("TPEnseignant")) {
+							TeacherPannel tchrPnl = new TeacherPannel () ;
+							tchrPnl.setVisible(true);
+						} 
+							
 					}else if (count > 1) {
 						JOptionPane.showMessageDialog(null, " Duplicate Username and Password !? ");
 					}else {
-						JOptionPane.showMessageDialog(null, " Username and Password is not Corrected :( \n Try Again!!!");
+						JOptionPane.showMessageDialog(null, " Username or Password is not Corrected :( \n Try Again!!!");
 					}
 					result.close();
 					prprStat.close();
