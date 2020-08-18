@@ -82,7 +82,12 @@ public class AdminPannel extends JFrame {
 		btnConsult.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// open the first frame for searching
-				
+				try {
+					adminConsult adminConslt = new adminConsult () ;
+					adminConslt.setVisible(true);
+				}catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnConsult.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -93,6 +98,13 @@ public class AdminPannel extends JFrame {
 		btnInsert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// open the second frame for inserting
+				try {
+					adminInsert adminAdd = new adminInsert () ;
+					adminAdd.setVisible(true);
+					
+				}catch (Exception e1) {
+					e1.printStackTrace();
+				}
 
 			}
 		});
@@ -103,6 +115,14 @@ public class AdminPannel extends JFrame {
 		JButton btnExecute = new JButton("Access the frame");
 		btnExecute.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// open the third frame for executing
+				try {
+					adminRequette adminRqt = new adminRequette () ;
+					adminRqt.setVisible(true);
+				}catch (Exception e1) {
+					e1.printStackTrace();
+				}
+					
 			}
 		});
 		btnExecute.setFont(new Font("Tahoma", Font.BOLD, 20));
