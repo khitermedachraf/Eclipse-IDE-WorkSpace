@@ -44,13 +44,16 @@ public class TeacherPannel extends JFrame {
 	Connection connection = null ;
 	private JTextField textFieldMatriculeEns;
 	private JTable table;
+	private JTextField textFieldMatricule_ens;
+	private JTextField textFieldNom_ens;
+	private JTextField textFieldPrenom_ens;
 	/**
 	 * Create the frame.
 	 */
 	public TeacherPannel() {
 		connection = sqliteConnection.dbConnector();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 852, 551);
+		setBounds(100, 100, 852, 688);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -99,7 +102,7 @@ public class TeacherPannel extends JFrame {
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					String query = " select * from Enseigant where matricule_ens=? ;";
+					String query = " select * from Enseignant where matricule_ens=? ;";
 					PreparedStatement prprStat = connection.prepareStatement(query) ;
 					prprStat.setString(1,textFieldMatriculeEns.getText());
 					ResultSet result = prprStat.executeQuery();
@@ -119,6 +122,70 @@ public class TeacherPannel extends JFrame {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		
+		JLabel lblNewLabel_3 = new JLabel("2- insert a tuple in the table");
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.ITALIC, 20));
+		lblNewLabel_3.setBounds(15, 421, 269, 37);
+		contentPane.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("Teacher : ");
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 20));
+		lblNewLabel_4.setBounds(272, 421, 163, 37);
+		contentPane.add(lblNewLabel_4);
+		
+		JLabel lblInsert = new JLabel("");
+		Image imgInsert = new ImageIcon(this.getClass().getResource("/insert.png")).getImage ();
+		lblInsert.setIcon(new ImageIcon(imgInsert));
+		lblInsert.setBounds(640, 377, 190, 153);
+		contentPane.add(lblInsert);
+		
+		JLabel lblNewLabel_5 = new JLabel("matricule_ens :");
+		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_5.setBounds(38, 491, 141, 39);
+		contentPane.add(lblNewLabel_5);
+		
+		textFieldMatricule_ens = new JTextField();
+		textFieldMatricule_ens.setForeground(Color.GRAY);
+		textFieldMatricule_ens.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		textFieldMatricule_ens.setBounds(194, 491, 146, 39);
+		contentPane.add(textFieldMatricule_ens);
+		textFieldMatricule_ens.setColumns(10);
+		
+		JLabel lblNewLabel_6 = new JLabel("nom_ens :");
+		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_6.setBounds(355, 491, 103, 39);
+		contentPane.add(lblNewLabel_6);
+		
+		textFieldNom_ens = new JTextField();
+		textFieldNom_ens.setForeground(Color.GRAY);
+		textFieldNom_ens.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		textFieldNom_ens.setBounds(457, 491, 163, 39);
+		contentPane.add(textFieldNom_ens);
+		textFieldNom_ens.setColumns(10);
+		
+		JLabel lblNewLabel_7 = new JLabel("prenom_ens :");
+		lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_7.setBounds(212, 546, 146, 34);
+		contentPane.add(lblNewLabel_7);
+		
+		textFieldPrenom_ens = new JTextField();
+		textFieldPrenom_ens.setForeground(Color.GRAY);
+		textFieldPrenom_ens.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		textFieldPrenom_ens.setBounds(351, 546, 163, 34);
+		contentPane.add(textFieldPrenom_ens);
+		textFieldPrenom_ens.setColumns(10);
+		
+		JButton btnSave = new JButton("Save ");
+		Image imgInsertBtn = new ImageIcon(this.getClass().getResource("/insertBtn.png")).getImage();
+		btnSave.setIcon(new ImageIcon(imgInsertBtn));
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		btnSave.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnSave.setBounds(640, 546, 153, 46);
+		contentPane.add(btnSave);
 		
 		
 		
