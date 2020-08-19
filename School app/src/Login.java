@@ -74,13 +74,13 @@ public class Login {
 
 		textFieldUsername = new JTextField();
 		textFieldUsername.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		textFieldUsername.setBounds(250, 118, 252, 30);
+		textFieldUsername.setBounds(250, 111, 252, 52);
 		frame.getContentPane().add(textFieldUsername);
 		textFieldUsername.setColumns(10);
 
 		passwordField = new JPasswordField();
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		passwordField.setBounds(250, 211, 252, 26);
+		passwordField.setBounds(250, 196, 252, 52);
 		frame.getContentPane().add(passwordField);
 
 		JButton btnLogin = new JButton("Login");

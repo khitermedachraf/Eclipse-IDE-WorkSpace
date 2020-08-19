@@ -128,7 +128,7 @@ public class TeacherPannel extends JFrame {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
-		JLabel lblNewLabel_3 = new JLabel("2- insert a tuple in the table");
+		JLabel lblNewLabel_3 = new JLabel("2- Insert a tuple in the table");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.ITALIC, 20));
 		lblNewLabel_3.setBounds(15, 421, 269, 37);
 		contentPane.add(lblNewLabel_3);
@@ -145,6 +145,7 @@ public class TeacherPannel extends JFrame {
 		contentPane.add(lblInsert);
 		
 		JLabel lblNewLabel_5 = new JLabel("matricule_ens :");
+		lblNewLabel_5.setForeground(Color.BLUE);
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblNewLabel_5.setBounds(38, 491, 141, 39);
 		contentPane.add(lblNewLabel_5);
@@ -157,6 +158,7 @@ public class TeacherPannel extends JFrame {
 		textFieldMatricule_ens.setColumns(10);
 		
 		JLabel lblNewLabel_6 = new JLabel("nom_ens :");
+		lblNewLabel_6.setForeground(Color.BLUE);
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblNewLabel_6.setBounds(355, 491, 103, 39);
 		contentPane.add(lblNewLabel_6);
@@ -169,6 +171,7 @@ public class TeacherPannel extends JFrame {
 		textFieldNom_ens.setColumns(10);
 		
 		JLabel lblNewLabel_7 = new JLabel("prenom_ens :");
+		lblNewLabel_7.setForeground(Color.BLUE);
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblNewLabel_7.setBounds(212, 546, 146, 34);
 		contentPane.add(lblNewLabel_7);
