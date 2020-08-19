@@ -37,7 +37,7 @@ public class adminInsert extends JFrame {
 	public adminInsert() {
 		connection = sqliteConnection.dbConnector(); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1025, 657);
+		setBounds(100, 100, 1025, 758);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
