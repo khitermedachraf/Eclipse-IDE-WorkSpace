@@ -47,16 +47,21 @@ public class adminInsert extends JFrame {
 	private JTextField textFieldNom_ens;
 	private JTextField textFieldPrenom_ens;
 	private JTextField textFieldCodeUnit;
-	private JTextField textField;
+	private JTextField textFieldLibelle;
 	private JTextField textFieldHeures;
 	private JTextField textFieldMatEns;
+	private JTextField textFieldMatEtu;
+	private JTextField textFieldCodeUnit4;
+	private JTextField textFieldNoteCC;
+	private JTextField textFieldNoteTP;
+	private JTextField textFieldNoteExam;
 	/**
 	 * Create the frame.
 	 */
 	public adminInsert() {
 		connection = sqliteConnection.dbConnector(); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1025, 871);
+		setBounds(100, 100, 1025, 952);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -304,12 +309,12 @@ public class adminInsert extends JFrame {
 				lblLibelle.setBounds(283, 577, 137, 37);
 				contentPane.add(lblLibelle);
 				
-				textField = new JTextField();
-				textField.setForeground(Color.GRAY);
-				textField.setFont(new Font("Tahoma", Font.PLAIN, 17));
-				textField.setColumns(10);
-				textField.setBounds(353, 577, 121, 37);
-				contentPane.add(textField);
+				textFieldLibelle = new JTextField();
+				textFieldLibelle.setForeground(Color.GRAY);
+				textFieldLibelle.setFont(new Font("Tahoma", Font.PLAIN, 17));
+				textFieldLibelle.setColumns(10);
+				textFieldLibelle.setBounds(353, 577, 121, 37);
+				contentPane.add(textFieldLibelle);
 				
 				JLabel lblNbrheures = new JLabel("nbr_heures :");
 				lblNbrheures.setForeground(Color.BLUE);
@@ -327,26 +332,132 @@ public class adminInsert extends JFrame {
 				JLabel lblMatriculeens_1 = new JLabel("matricule_ens :");
 				lblMatriculeens_1.setForeground(Color.BLUE);
 				lblMatriculeens_1.setFont(new Font("Tahoma", Font.BOLD, 17));
-				lblMatriculeens_1.setBounds(283, 647, 147, 37);
+				lblMatriculeens_1.setBounds(283, 630, 147, 37);
 				contentPane.add(lblMatriculeens_1);
 				
 				textFieldMatEns = new JTextField();
 				textFieldMatEns.setForeground(Color.GRAY);
 				textFieldMatEns.setFont(new Font("Tahoma", Font.PLAIN, 17));
 				textFieldMatEns.setColumns(10);
-				textFieldMatEns.setBounds(434, 647, 179, 37);
+				textFieldMatEns.setBounds(432, 630, 179, 37);
 				contentPane.add(textFieldMatEns);
 				
 				JButton buttonSaveUnit = new JButton("Save ");
 				buttonSaveUnit.setIcon(new ImageIcon(imgInsertBtn));
 				buttonSaveUnit.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
+						try {
+							String query = " insert into Unite (code_unite,libelle,nbr_heures,matricule_ens) values (?,?,?,?);";
+							PreparedStatement prprStat = connection.prepareStatement(query) ;
+							prprStat.setString(1,textFieldCodeUnit.getText());
+							prprStat.setString(2,textFieldLibelle.getText());
+							prprStat.setString(3,textFieldHeures.getText());
+							prprStat.setString(4,textFieldMatEns.getText());
+							prprStat.execute();
+							JOptionPane.showMessageDialog(null,"Data saved successfully");
+							prprStat.close();
+						}catch (Exception e1) {
+							e1.printStackTrace();
+						}
 					}
 				});
 				buttonSaveUnit.setFont(new Font("Tahoma", Font.BOLD, 20));
-				buttonSaveUnit.setBounds(796, 568, 153, 46);
+				buttonSaveUnit.setBounds(813, 571, 153, 46);
 				contentPane.add(buttonSaveUnit);
+				
+				JSeparator separator_2 = new JSeparator();
+				separator_2.setForeground(Color.RED);
+				separator_2.setBounds(68, 693, 881, 2);
+				contentPane.add(separator_2);
+				
+				JLabel lblCodeunite_1 = new JLabel("matricule_etu :");
+				lblCodeunite_1.setForeground(Color.BLUE);
+				lblCodeunite_1.setFont(new Font("Tahoma", Font.BOLD, 17));
+				lblCodeunite_1.setBounds(31, 770, 137, 37);
+				contentPane.add(lblCodeunite_1);
+				
+				textFieldMatEtu = new JTextField();
+				textFieldMatEtu.setForeground(Color.GRAY);
+				textFieldMatEtu.setFont(new Font("Tahoma", Font.PLAIN, 17));
+				textFieldMatEtu.setColumns(10);
+				textFieldMatEtu.setBounds(165, 770, 179, 37);
+				contentPane.add(textFieldMatEtu);
+				
+				JLabel lblCodeunite_2 = new JLabel("code_unite :");
+				lblCodeunite_2.setForeground(Color.BLUE);
+				lblCodeunite_2.setFont(new Font("Tahoma", Font.BOLD, 17));
+				lblCodeunite_2.setBounds(359, 767, 137, 37);
+				contentPane.add(lblCodeunite_2);
+				
+				textFieldCodeUnit4 = new JTextField();
+				textFieldCodeUnit4.setForeground(Color.GRAY);
+				textFieldCodeUnit4.setFont(new Font("Tahoma", Font.PLAIN, 17));
+				textFieldCodeUnit4.setColumns(10);
+				textFieldCodeUnit4.setBounds(474, 770, 179, 37);
+				contentPane.add(textFieldCodeUnit4);
+				
+				JLabel lblNotecc = new JLabel("note_cc :");
+				lblNotecc.setForeground(Color.BLUE);
+				lblNotecc.setFont(new Font("Tahoma", Font.BOLD, 17));
+				lblNotecc.setBounds(671, 770, 137, 37);
+				contentPane.add(lblNotecc);
+				
+				textFieldNoteCC = new JTextField();
+				textFieldNoteCC.setForeground(Color.GRAY);
+				textFieldNoteCC.setFont(new Font("Tahoma", Font.PLAIN, 17));
+				textFieldNoteCC.setColumns(10);
+				textFieldNoteCC.setBounds(770, 770, 179, 37);
+				contentPane.add(textFieldNoteCC);
+				
+				JLabel lblNotetp = new JLabel("note_tp :");
+				lblNotetp.setForeground(Color.BLUE);
+				lblNotetp.setFont(new Font("Tahoma", Font.BOLD, 17));
+				lblNotetp.setBounds(147, 826, 137, 37);
+				contentPane.add(lblNotetp);
+				
+				textFieldNoteTP = new JTextField();
+				textFieldNoteTP.setForeground(Color.GRAY);
+				textFieldNoteTP.setFont(new Font("Tahoma", Font.PLAIN, 17));
+				textFieldNoteTP.setColumns(10);
+				textFieldNoteTP.setBounds(241, 826, 179, 37);
+				contentPane.add(textFieldNoteTP);
+				
+				JLabel lblNoteexamen = new JLabel("note_examen :");
+				lblNoteexamen.setForeground(Color.BLUE);
+				lblNoteexamen.setFont(new Font("Tahoma", Font.BOLD, 17));
+				lblNoteexamen.setBounds(435, 826, 137, 37);
+				contentPane.add(lblNoteexamen);
+				
+				textFieldNoteExam = new JTextField();
+				textFieldNoteExam.setForeground(Color.GRAY);
+				textFieldNoteExam.setFont(new Font("Tahoma", Font.PLAIN, 17));
+				textFieldNoteExam.setColumns(10);
+				textFieldNoteExam.setBounds(572, 823, 179, 37);
+				contentPane.add(textFieldNoteExam);
+				
+				JButton button_1 = new JButton("Save ");
+				button_1.setIcon(new ImageIcon(imgInsertBtn));
+				button_1.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						try {
+							String query = " insert into EtudiantUnite (matricule_etu,code_unite,note_cc,note_tp,note_examen) values (?,?,?,?,?);";
+							PreparedStatement prprStat = connection.prepareStatement(query) ;
+							prprStat.setString(1,textFieldMatEtu.getText());
+							prprStat.setString(2,textFieldCodeUnit4.getText());
+							prprStat.setString(3,textFieldNoteCC.getText());
+							prprStat.setString(4,textFieldNoteTP.getText());
+							prprStat.setString(5,textFieldNoteExam.getText());
+							prprStat.execute();
+							JOptionPane.showMessageDialog(null,"Data saved successfully");
+							prprStat.close();
+						}catch (Exception e1) {
+							e1.printStackTrace();
+						}
+					}
+				});
+				button_1.setFont(new Font("Tahoma", Font.BOLD, 20));
+				button_1.setBounds(813, 817, 153, 46);
+				contentPane.add(button_1);
 				
 				
 	}
