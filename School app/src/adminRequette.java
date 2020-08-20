@@ -3,6 +3,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -10,9 +12,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import net.proteanit.sql.DbUtils;
+
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
 
 public class adminRequette extends JFrame {
 
@@ -34,6 +41,7 @@ public class adminRequette extends JFrame {
 		});
 	}
 	Connection connection = null ; 
+	private JTable table;
 	/**
 	 * Create the frame.
 	 */
@@ -77,6 +85,21 @@ public class adminRequette extends JFrame {
 				btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 				btnNewButton_1.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						// show Data for  the selected query  
+						try {
+							String query = "SELECT nom_etu,prenom_etu \r\n" + 
+									"	  FROM Etudiant,EtudiantUnite\r\n" + 
+									"	  WHERE Etudiant.matricule_etu=EtudiantUnite.matricule_etu \r\n" + 
+									"	  and note_examen =20;";
+							PreparedStatement prprStat = connection.prepareStatement(query) ;
+							ResultSet result = prprStat.executeQuery();
+							table.setModel(DbUtils.resultSetToTableModel(result));
+							// close connection with data base .
+							result.close();
+							prprStat.close();
+						}catch (Exception e1) {
+							e1.printStackTrace();
+						}
 					}
 				});
 				btnNewButton_1.setBounds(31, 212, 722, 57);
@@ -112,6 +135,30 @@ public class adminRequette extends JFrame {
 				contentPane.add(lblForTpQuerys);
 				
 				JButton btnAfficherLes = new JButton("2. Afficher les noms et pr\u00E9noms des \u00E9tudiants qui ne sont pas inscrits dans l'unit\u00E9 \u00AB POO \u00BB.");
+				btnAfficherLes.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						// show Data for  the selected query  
+						try {
+							String query = "SELECT nom_etu,prenom_etu\r\n" + 
+									"	  FROM Etudiant\r\n" + 
+									"	  WHERE matricule_etu \r\n" + 
+									"	  NOT IN  (SELECT matricule_etu \r\n" + 
+									"	          FROM EtudiantUnite,Unite\r\n" + 
+									"		        WHERE EtudiantUnite.code_unite=Unite.code_unite\r\n" + 
+									"		        AND libelle='POO');";  
+									
+							PreparedStatement prprStat = connection.prepareStatement(query) ;
+							ResultSet result = prprStat.executeQuery();
+							table.setModel(DbUtils.resultSetToTableModel(result));
+							// close connection with data base .
+							result.close();
+							prprStat.close();
+						}catch (Exception e1) {
+							e1.printStackTrace();
+						}
+						
+					}
+				});
 				btnAfficherLes.setForeground(Color.RED);
 				btnAfficherLes.setFont(new Font("Tahoma", Font.PLAIN, 16));
 				btnAfficherLes.setBounds(31, 316, 722, 57);
@@ -120,6 +167,21 @@ public class adminRequette extends JFrame {
 				JButton btnAfficherPour = new JButton("3. Afficher pour chaque \u00E9tudiant, son nom, son pr\u00E9nom sa moyenne par unit\u00E9 d'enseignement");
 				btnAfficherPour.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						// show Data for  the selected query  
+						try {
+							String query = "     Select nom_etu,prenom_etu,libelle, (note_CC+note_TP+2*note_examen)/4 as moyG\r\n" + 
+									"     From etudiantunite,etudiant,unite\r\n" + 
+									"     Where etudiant.matricule_etu = etudiantunite.matricule_etu\r\n" + 
+									"     And unite.code_unite = etudiantunite.code_unite;" ;
+							PreparedStatement prprStat = connection.prepareStatement(query) ;
+							ResultSet result = prprStat.executeQuery();
+							table.setModel(DbUtils.resultSetToTableModel(result));
+							// close connection with data base .
+							result.close();
+							prprStat.close();
+						}catch (Exception e1) {
+							e1.printStackTrace();
+						}
 					}
 				});
 				btnAfficherPour.setForeground(Color.RED);
@@ -148,6 +210,17 @@ public class adminRequette extends JFrame {
 				label.setIcon(new ImageIcon(imgRun));
 				label.setBounds(912, 285, 137, 132);
 				contentPane.add(label);
+				
+				JLabel lblNewLabel_3 = new JLabel("#Bulletin board# :");
+				lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 20));
+				lblNewLabel_3.setBounds(846, 433, 229, 41);
+				contentPane.add(lblNewLabel_3);
+				
+				JScrollPane scrollPane = new JScrollPane();
+				scrollPane.setBounds(585, 490, 533, 260);
+				contentPane.add(scrollPane);
+				
+				table = new JTable();
+				scrollPane.setViewportView(table);
 	}
-
 }
